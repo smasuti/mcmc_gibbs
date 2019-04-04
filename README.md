@@ -7,7 +7,7 @@ uses a simple forward model of the form dobs=m1*(1-exp(-m2*x)).
 
 After running the example you will see the posterior plotted something like below.
 
-![](posterior.pdf) 
+![](posterior.tiff) 
 
 Feel free to use this code as you like. You may or may not acknowledge me and thats
 perfectly fine.
