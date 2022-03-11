@@ -3,7 +3,7 @@ MCMC simulation using Gibbs sampling.
 
 This is the simple Gibbs sampling algorithm. The file gibbs_sample.m contains the
 function and an example is given in the example.m file on how to use. The example
-uses a simple forward model of the form dobs=m1*(1-exp(-m2*x)).
+uses a simple forward model of the form ```dobs=m1*(1-exp(-m2*x))```
 
 After running the example you will see the posterior plotted something like below.
 
@@ -11,4 +11,4 @@ After running the example you will see the posterior plotted something like belo
 
 Feel free to use this code as you like for research purposes. You may or may not acknowledge me and thats perfectly fine.
 
-I appreciate any comments or bug reports.
+=======
