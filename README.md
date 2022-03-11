@@ -9,5 +9,6 @@ After running the example you will see the posterior plotted something like belo
 
 ![](posterior.png) 
 
-Feel free to use this code as you like. You may or may not acknowledge me and thats
-perfectly fine.
+Feel free to use this code as you like for research purposes. You may or may not acknowledge me and thats perfectly fine.
+
+I appreciate any comments or bug reports.
