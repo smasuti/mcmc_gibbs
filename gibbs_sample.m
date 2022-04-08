@@ -33,32 +33,47 @@ rand('seed' ,12345);
 
 ms=ones(ncond,1)*m0;
 misfit=zeros(iter,1);
+randomscan=0;
 
 accept=0;
 for i=1:iter
     for j=1:nd
         mcond=unifrnd(bounds(j,1),bounds(j,2),ncond,1);
         ms(:,j)=mcond;
-        liklihood=zeros(ncond,1);
+        logliklihood=zeros(ncond,1);
         for k=1:ncond
-            liklihood(k)=residual(ms(k,:));
+            logliklihood(k)=residual(ms(k,:));
         end
-        [~,index]=min(liklihood);
+
+
+        if (randomscan==1)
+            [~,index]=min(logliklihood);
+            lmax=exp(-logliklihood(index)/2); 
+            while (accept==0)
+                ran=unifrnd(min(mcond),max(mcond));
+                ms(1,j)=ran;
+                lmdash=exp(-residual(ms(1,:))/2);
+                s=rand;
+                if (s<(lmdash/lmax))
+                    accept=1;
+                    samples(i,j)=ran;
+                    ms(1:end,j)=ones(ncond,1)*samples(i,j);
+                end
+            end
+            accept=0;   
+        else
+% accepting bestfit
+%         [~,index]=min(logliklihood);
 %         samples(i,j)=mcond(index);
 %         ms(1:end,j)=ones(ncond,1)*mcond(index);
-        lmax=exp(-liklihood(index)/2);
-        while (accept==0)
-            ran=unifrnd(min(mcond),max(mcond));
-            ms(1,j)=ran;
-            lmdash=exp(-residual(ms(1,:))/2);
-            s=rand;
-            if (s<(lmdash/lmax))
-                accept=1;
-                samples(i,j)=ran;
-                ms(1:end,j)=ones(ncond,1)*samples(i,j);
-            end
+
+            fx=exp(-logliklihood)/sum(exp(-logliklihood));
+            gmu=sum(mcond.*fx);
+            gvar=sum((mcond.^2).*fx)-gmu^2;
+            new_sample=normrnd(gmu,sqrt(gvar));
+            samples(i,j)=new_sample;
+            ms(1:end,j)=ones(ncond,1)*new_sample;
         end
-        accept=0;   
     end
     misfit(i)=residual(samples(i,:));
     fprintf('Gibbs sampler iteration, misfit: %d %.2e\n',i,misfit(i));

@@ -61,8 +61,9 @@ plot(m1*ones(length(y),1),y,'k--');
 plot(x,m2*ones(length(x),1),'k--');
 % xlim([1 3]);
 % ylim([2 6]);
-xlim([3.5 4.5]);
-ylim([1 3]);
+% xlim([3.5 4.5]);
+% ylim([1 3]);
+xlim([3.7 4.4]);ylim([1 2.8]);
 xlabel('$m_1$','Interpreter','latex');
 ylabel('$m_2$','Interpreter','latex');
 
